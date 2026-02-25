@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'algootechindonesia - Solusi Teknologi Terpercaya',
   description: 'Penyedia peralatan teknologi berkualitas tinggi untuk bisnis Anda',
+  icons: {
+    icon: '/icon.jpeg',
+  },
 }
 
 export default function RootLayout({
