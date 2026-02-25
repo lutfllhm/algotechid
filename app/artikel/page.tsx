@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Calendar, User, ArrowRight } from 'lucide-react'
 import { articles } from '../../data/articles'
 
@@ -38,11 +39,12 @@ export default function ArtikelPage() {
                 className="card overflow-hidden group"
               >
                 <div className="relative h-48 bg-gradient-to-br from-primary-400 to-primary-600 overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-white text-6xl font-bold opacity-20">
-                      {article.id}
-                    </div>
-                  </div>
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    className="object-cover"
+                  />
                   <div className="absolute top-4 left-4">
                     <span className="bg-white text-primary-600 px-3 py-1 rounded-full text-sm font-semibold">
                       {article.category}

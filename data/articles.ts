@@ -6,7 +6,7 @@ export const articles = [
     date: '15 Februari 2026',
     author: 'Tim algootechindonesia',
     category: 'Panduan',
-    image: 'printer-guide',
+    image: '/banner/bn1.png',
     content: [
       {
         type: 'paragraph',
@@ -71,7 +71,7 @@ export const articles = [
     date: '10 Februari 2026',
     author: 'Tim algootechindonesia',
     category: 'Teknologi',
-    image: 'pos-system',
+    image: '/banner/bn2.jpeg',
     content: [
       {
         type: 'paragraph',
@@ -124,7 +124,7 @@ export const articles = [
     date: '5 Februari 2026',
     author: 'Tim algootechindonesia',
     category: 'Keamanan',
-    image: 'money-counter',
+    image: '/banner/bn3.jpeg',
     content: [
       {
         type: 'paragraph',
@@ -176,7 +176,7 @@ export const articles = [
     date: '1 Februari 2026',
     author: 'Tim algootechindonesia',
     category: 'Komunikasi',
-    image: 'walkie-talkie',
+    image: '/banner/bn4.jpeg',
     content: [
       {
         type: 'paragraph',
@@ -225,7 +225,7 @@ export const articles = [
     date: '28 Januari 2026',
     author: 'Tim algootechindonesia',
     category: 'Maintenance',
-    image: 'printer-maintenance',
+    image: '/banner/bn5.jpeg',
     content: [
       {
         type: 'paragraph',
@@ -286,7 +286,7 @@ export const articles = [
     date: '20 Januari 2026',
     author: 'Tim algootechindonesia',
     category: 'Tren',
-    image: 'retail-trends',
+    image: '/banner/bn6.jpeg',
     content: [
       {
         type: 'paragraph',

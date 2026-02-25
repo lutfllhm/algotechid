@@ -14,61 +14,18 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 text-white overflow-hidden min-h-screen flex items-center">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(255,255,255,0.1),transparent)]"></div>
+      <section className="relative text-white overflow-hidden min-h-screen flex items-center">
         <div className="absolute inset-0">
-          <div className="absolute top-20 left-10 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-float" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-float" style={{ animationDelay: '2s' }}></div>
+          <Image
+            src="/banner/banner.jpeg"
+            alt="Banner Background"
+            fill
+            className="object-cover"
+            priority
+          />
         </div>
         
         <div className="container-custom relative z-10 py-20 md:py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
-          >
-            <motion.div
-              className="mb-6"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-            >
-              <div className="relative w-full max-w-3xl h-32 md:h-40">
-                <Image
-                  src="/tagline.png"
-                  alt="Solusi Teknologi untuk Bisnis Modern"
-                  fill
-                  className="object-contain object-left"
-                  priority
-                />
-              </div>
-            </motion.div>
-            
-            <motion.p 
-              className="text-lg md:text-xl mb-8 text-primary-50 leading-relaxed"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              algootechindonesia menyediakan peralatan teknologi berkualitas tinggi untuk meningkatkan efisiensi bisnis Anda
-            </motion.p>
-            <motion.div 
-              className="flex flex-wrap gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              <Link href="#products" className="px-8 py-3 bg-white text-primary-600 font-bold rounded-xl hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 inline-flex items-center space-x-2">
-                <span>Lihat Produk</span>
-                <span>→</span>
-              </Link>
-              <Link href="/kontak" className="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-xl hover:bg-white hover:text-primary-600 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105">
-                Hubungi Kami
-              </Link>
-            </motion.div>
-          </motion.div>
         </div>
       </section>
 
