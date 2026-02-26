@@ -12,12 +12,16 @@ import { products } from '../data/products'
 export default function Home() {
   const featuredProducts = products.slice(0, 6)
   const bannerImages = [
-    '/banner/bn3.jpeg',
-    '/banner/bn4.jpeg',
-    '/banner/bn6.jpeg',
-    '/banner/bn7.jpeg',
-    '/banner/bn8.jpeg',
-    '/banner/bn9.jpeg',
+    '/banner/banner.webp',
+    '/banner/bn1.webp',
+    '/banner/bn2.webp',
+    '/banner/bn3.webp',
+    '/banner/bn4.webp',
+    '/banner/bn5.webp',
+    '/banner/bn6.webp',
+    '/banner/bn7.webp',
+    '/banner/bn8.webp',
+    '/banner/bn9.webp',
   ]
   const [currentBanner, setCurrentBanner] = useState(0)
 
@@ -32,25 +36,24 @@ export default function Home() {
   return (
     <div>
       {/* Hero Section */}
-      <section className="relative text-white overflow-hidden min-h-[60vh] md:min-h-screen flex items-center pt-20">
-        {bannerImages.map((banner, index) => (
-          <div
-            key={banner}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentBanner ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <Image
-              src={banner}
-              alt={`Banner ${index + 1}`}
-              fill
-              className="object-cover object-center"
-              priority={index === 0}
-            />
-          </div>
-        ))}
-        
-        <div className="container-custom relative z-10 py-12 md:py-20">
+      <section className="relative text-white overflow-hidden pt-16 md:pt-20">
+        <div className="relative w-full min-h-[50vh] md:min-h-[70vh]">
+          {bannerImages.map((banner, index) => (
+            <div
+              key={banner}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentBanner ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <Image
+                src={banner}
+                alt={`Banner ${index + 1}`}
+                fill
+                className="object-cover object-top"
+                priority={index === 0}
+              />
+            </div>
+          ))}
         </div>
       </section>
 
