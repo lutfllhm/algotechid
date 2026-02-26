@@ -316,7 +316,7 @@ export default function BackgroundMusic() {
         initial={{ opacity: 0, scale: 0.8, y: 100 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ delay: 1, duration: 0.5, type: "spring" }}
-        className="fixed bottom-6 right-6 z-50"
+        className="fixed bottom-24 right-6 z-50"
       >
         <div className="bg-white/95 backdrop-blur-lg rounded-2xl shadow-2xl border border-gray-200 overflow-hidden">
           <AnimatePresence mode="wait">
@@ -332,7 +332,7 @@ export default function BackgroundMusic() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <Music size={16} className="text-primary-500" />
-                    <span className="text-sm font-semibold text-gray-700">Background Music</span>
+                    <span className="text-sm font-semibold text-gray-700">Algoo in Motion</span>
                   </div>
                   <button
                     onClick={() => setShowControls(false)}

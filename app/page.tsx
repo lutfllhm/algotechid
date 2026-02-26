@@ -1,29 +1,32 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { ShoppingCart, TrendingUp, Shield, Headphones, Printer, Calculator, Wallet, Radio, Barcode, Monitor } from 'lucide-react'
 import ProductCard from '../components/ProductCard'
 import CategoryCard from '../components/CategoryCard'
+import StatsSection from '../components/StatsSection'
+import NewsletterSection from '../components/NewsletterSection'
+import TrustSection from '../components/TrustSection'
 import { products } from '../data/products'
 
 export default function Home() {
   const featuredProducts = products.slice(0, 6)
   const bannerImages = [
     '/banner/banner.webp',
-    '/banner/bn1.webp',
-    '/banner/bn2.webp',
     '/banner/bn3.webp',
     '/banner/bn4.webp',
-    '/banner/bn5.webp',
     '/banner/bn6.webp',
     '/banner/bn7.webp',
     '/banner/bn8.webp',
     '/banner/bn9.webp',
   ]
   const [currentBanner, setCurrentBanner] = useState(0)
+  const { scrollY } = useScroll()
+  const y = useTransform(scrollY, [0, 500], [0, 150])
+  const opacity = useTransform(scrollY, [0, 300], [1, 0])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,26 +38,46 @@ export default function Home() {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="relative text-white overflow-hidden pt-16 md:pt-20">
-        <div className="relative w-full min-h-[50vh] md:min-h-[70vh]">
+      {/* Hero Section with Parallax */}
+      <section className="relative text-white overflow-hidden">
+        <motion.div 
+          style={{ y }}
+          className="relative w-full h-[60vh] md:h-screen pt-16 md:pt-20"
+        >
           {bannerImages.map((banner, index) => (
-            <div
+            <motion.div
               key={banner}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentBanner ? 'opacity-100' : 'opacity-0'
-              }`}
+              style={{ opacity: index === currentBanner ? opacity : 0 }}
+              className={`absolute inset-0 transition-opacity duration-1000`}
             >
               <Image
                 src={banner}
                 alt={`Banner ${index + 1}`}
                 fill
-                className="object-cover object-top"
+                className="object-cover"
                 priority={index === 0}
               />
-            </div>
+            </motion.div>
           ))}
-        </div>
+          
+          {/* Banner Indicators */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+            {bannerImages.map((_, index) => (
+              <motion.button
+                key={index}
+                onClick={() => setCurrentBanner(index)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  index === currentBanner 
+                    ? 'w-8 bg-white' 
+                    : 'w-2 bg-white/50 hover:bg-white/75'
+                }`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                aria-label={`Go to banner ${index + 1}`}
+              />
+            ))}
+          </div>
+        </motion.div>
       </section>
 
       {/* Features Section */}
@@ -85,6 +108,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Trust Section */}
+      <TrustSection />
+
+      {/* Stats Section */}
+      <StatsSection />
 
       {/* Products Section */}
       <section id="products" className="py-12 md:py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
@@ -192,6 +221,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Newsletter Section */}
+      <NewsletterSection />
 
       {/* CTA Section */}
       <section className="py-12 md:py-20 bg-gradient-to-br from-gray-900 via-primary-900 to-primary-800 text-white relative overflow-hidden">

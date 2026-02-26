@@ -53,12 +53,12 @@ export default function ArtikelDetailPage({ params }: { params: { id: string } }
             transition={{ delay: 0.2 }}
           >
             {/* Article Image */}
-            <div className="relative h-96 bg-gradient-to-br from-primary-400 to-primary-600 rounded-2xl mb-12 overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-white text-9xl font-bold opacity-20">
-                  {article.id}
-                </div>
-              </div>
+            <div className="relative h-96 bg-gray-200 rounded-2xl mb-12 overflow-hidden">
+              <img
+                src={article.image}
+                alt={article.title}
+                className="w-full h-full object-cover"
+              />
             </div>
 
             {/* Article Body */}
@@ -117,12 +117,12 @@ export default function ArtikelDetailPage({ params }: { params: { id: string } }
                 transition={{ delay: index * 0.1 }}
                 className="card overflow-hidden group"
               >
-                <div className="relative h-48 bg-gradient-to-br from-primary-400 to-primary-600">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-white text-6xl font-bold opacity-20">
-                      {relatedArticle.id}
-                    </div>
-                  </div>
+                <div className="relative h-48 bg-gray-200">
+                  <img
+                    src={relatedArticle.image}
+                    alt={relatedArticle.title}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="p-6">
                   <h3 className="text-lg font-bold mb-2 text-gray-900 line-clamp-2 group-hover:text-primary-600 transition-colors">
