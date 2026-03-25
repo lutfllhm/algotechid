@@ -13,9 +13,10 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
+      setScrolled(window.scrollY > 48)
     }
-    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
@@ -39,15 +40,20 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-white shadow-lg py-2' 
-        : 'bg-white/95 backdrop-blur-md shadow-md py-3'
-    }`}>
+    <nav
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white shadow-lg py-2 border-b border-transparent'
+          : 'bg-transparent border-b border-white/35 shadow-none py-3'
+      }`}
+    >
       <div className="container-custom">
         <div className="flex items-center justify-between">
           {/* Logo & Brand */}
-          <Link href="/" className="flex items-center space-x-3 group">
+          <Link
+            href="/"
+            className={`flex items-center space-x-3 group ${!scrolled ? 'drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]' : ''}`}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -77,81 +83,92 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-1">
-            {navLinks.map((link, index) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-              >
-                <Link
-                  href={link.href}
-                  className="px-3 py-2 font-medium transition-colors duration-300 hover:text-primary-600 text-sm text-gray-700 rounded-lg hover:bg-primary-50"
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-            
-            {/* Produk Dropdown */}
-            <div 
-              className="relative"
-              onMouseEnter={() => setShowProductMenu(true)}
-              onMouseLeave={() => setShowProductMenu(false)}
+            <div
+              className={
+                !scrolled
+                  ? 'flex items-center space-x-1 [&_a]:drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)] [&_button]:drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]'
+                  : 'flex items-center space-x-1'
+              }
             >
-              <button className="px-3 py-2 font-medium transition-colors duration-300 hover:text-primary-600 text-sm text-gray-700 rounded-lg hover:bg-primary-50 flex items-center space-x-1">
-                <span>Produk</span>
-                <ChevronDown size={16} className={`transition-transform duration-300 ${showProductMenu ? 'rotate-180' : ''}`} />
-              </button>
-              
-              <AnimatePresence>
-                {showProductMenu && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden"
+              {navLinks.map((link, index) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                >
+                  <Link
+                    href={link.href}
+                    className={`px-3 py-2 font-medium transition-colors duration-300 hover:text-primary-600 text-sm text-gray-700 rounded-lg ${scrolled ? 'hover:bg-primary-50' : 'hover:bg-white/25'}`}
                   >
-                    <div className="p-4 bg-gradient-to-br from-primary-50 to-white border-b border-gray-100">
-                      <h3 className="font-bold text-gray-900 mb-1">Kategori Produk</h3>
-                      <p className="text-xs text-gray-600">Pilih kategori untuk melihat produk</p>
-                    </div>
-                    <div className="p-2">
-                      {productCategories.map((category) => (
-                        <Link
-                          key={category.name}
-                          href={category.href}
-                          className="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-primary-50 transition-colors group"
-                        >
-                          <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center group-hover:bg-primary-200 transition-colors">
-                            <category.icon size={20} className="text-primary-600" />
-                          </div>
-                          <div className="flex-1">
-                            <div className="font-semibold text-sm text-gray-900 group-hover:text-primary-600 transition-colors">
-                              {category.name}
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+
+              {/* Produk Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setShowProductMenu(true)}
+                onMouseLeave={() => setShowProductMenu(false)}
+              >
+                <button
+                  type="button"
+                  className={`px-3 py-2 font-medium transition-colors duration-300 hover:text-primary-600 text-sm text-gray-700 rounded-lg flex items-center space-x-1 ${scrolled ? 'hover:bg-primary-50' : 'hover:bg-white/25'}`}
+                >
+                  <span>Produk</span>
+                  <ChevronDown size={16} className={`transition-transform duration-300 ${showProductMenu ? 'rotate-180' : ''}`} />
+                </button>
+
+                <AnimatePresence>
+                  {showProductMenu && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute top-full right-0 mt-2 w-80 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden"
+                    >
+                      <div className="p-4 bg-gradient-to-br from-primary-50 to-white border-b border-gray-100">
+                        <h3 className="font-bold text-gray-900 mb-1">Kategori Produk</h3>
+                        <p className="text-xs text-gray-600">Pilih kategori untuk melihat produk</p>
+                      </div>
+                      <div className="p-2">
+                        {productCategories.map((category) => (
+                          <Link
+                            key={category.name}
+                            href={category.href}
+                            className="flex items-center space-x-3 px-3 py-2.5 rounded-lg hover:bg-primary-50 transition-colors group"
+                          >
+                            <div className="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center group-hover:bg-primary-200 transition-colors">
+                              <category.icon size={20} className="text-primary-600" />
                             </div>
-                            <div className="text-xs text-gray-500">{category.count} produk</div>
-                          </div>
+                            <div className="flex-1">
+                              <div className="font-semibold text-sm text-gray-900 group-hover:text-primary-600 transition-colors">
+                                {category.name}
+                              </div>
+                              <div className="text-xs text-gray-500">{category.count} produk</div>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                      <div className="p-3 bg-gray-50 border-t border-gray-100">
+                        <Link
+                          href="/produk"
+                          className="block text-center text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors"
+                        >
+                          Lihat Semua Produk →
                         </Link>
-                      ))}
-                    </div>
-                    <div className="p-3 bg-gray-50 border-t border-gray-100">
-                      <Link
-                        href="/produk"
-                        className="block text-center text-sm font-semibold text-primary-600 hover:text-primary-700 transition-colors"
-                      >
-                        Lihat Semua Produk →
-                      </Link>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
             {/* CTA Button */}
             <Link
               href="/kontak"
-              className="ml-4 px-5 py-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-md hover:shadow-lg text-sm flex items-center space-x-2"
+              className="ml-4 px-5 py-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white font-semibold rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-md hover:shadow-lg text-sm flex items-center space-x-2 drop-shadow-md"
             >
               <Phone size={16} />
               <span>Kontak</span>
@@ -160,8 +177,9 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-lg transition-colors text-gray-700 hover:bg-gray-100"
+            className={`lg:hidden p-2 rounded-lg transition-colors text-gray-700 ${scrolled ? 'hover:bg-gray-100' : 'hover:bg-white/25 drop-shadow-[0_1px_2px_rgba(255,255,255,0.95)]'}`}
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -174,7 +192,7 @@ export default function Navbar() {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden mt-4 bg-white rounded-lg shadow-lg overflow-hidden"
+              className="lg:hidden mt-4 bg-white rounded-lg shadow-lg border border-gray-100 overflow-hidden"
             >
               <div className="py-3">
                 {navLinks.map((link) => (
